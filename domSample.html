@@ -1,0 +1,82 @@
+
+<html>
+    <head><title>DOM Elements</title></titl></head>
+    <script
+  src="jquery-3.2.1.min.js"></script>
+    <body>
+
+       <div class="someForm" style="margin-top: 25px; margin-left: 15px;" >
+        <form id="formId">
+            <div id='message'>
+
+            </div>
+            <label>SomeInput</label>
+            <input type="text" id="someInput" name="someInput" style="border-style-left:none;">
+           
+        </form>
+        <button class="btn btn-success" id="formBtn" name="formBtn">SomeAdd</button>
+        </div>
+
+        <div id=ulliid>
+        <ul class='myList'>
+        
+        </ul>
+
+        </div>
+
+       
+    </body>
+</html>
+
+<script>
+    $(document).ready(function(){
+
+
+  
+
+   $('#formBtn').on('click',function(e){
+
+    e.preventDefault();
+   var someInput = document.getElementById('someInput').value;
+    if(someInput != ''){
+        var someArray= [];
+       var listarray = [];
+        $('ul.myList').each(function(i , value){
+         var livalue = $(this).find('li');
+        
+           listarray.push(livalue.text());
+           console.log(listarray[i] );
+
+            if(listarray[i]== someInput){
+                document.getElementById('message').innerHTML ='Searched Keyword already listed '+someInput ;
+                  setTimeout(function(){ document.getElementById('message').innerHTML ='';},3000)
+              }if(listarray[i] != someInput){
+                 
+                  someArray.push(someInput);
+
+                          var mylist = $('ul.myList');      
+                      $.each(someArray, function(i)
+                      {
+                          var li = $('<li/>')
+                              .addClass('ui-li')
+                              .attr('id', 'movieName')
+                              .text(someArray[i])
+                              .appendTo(mylist);
+                       /*
+                          var aaa = $('<a/>')
+                              .addClass('ui-all')
+                              .text(someArray[i])
+                              .appendTo(li);
+                       */
+                      });
+              }
+          
+        });
+
+      }else{ message = '<p>input is missing </p>';
+            document.getElementById('message').innerHTML=message;}
+
+      });
+
+    });
+</script>
