@@ -10,6 +10,7 @@
             <div id='message'>
 
             </div>
+            <h5>Enter Your Words :</h5>
             <label>SomeInput</label>
             <input type="text" id="someInput" name="someInput" style="border-style-left:none;">
            
@@ -21,7 +22,9 @@
         <ul class='myList'>
         
         </ul>
-
+       
+ 
+  
         </div>
 
        
@@ -29,30 +32,30 @@
 </html>
 
 <script>
-    $(document).ready(function(){
-
-
-  
-
-   $('#formBtn').on('click',function(e){
-
-    e.preventDefault();
-   var someInput = document.getElementById('someInput').value;
-    if(someInput != ''){
-        var someArray= [];
-       var listarray = [];
-        $('ul.myList').each(function(i , value){
-         var livalue = $(this).find('li');
+          
+ $('#formBtn').on('click',function (e) { 
         
-           listarray.push(livalue.text());
-           console.log(listarray[i] );
-
-            if(listarray[i]== someInput){
-                document.getElementById('message').innerHTML ='Searched Keyword already listed '+someInput ;
-                  setTimeout(function(){ document.getElementById('message').innerHTML ='';},3000)
-              }if(listarray[i] != someInput){
-                 
-                  someArray.push(someInput);
+            e.preventDefault();
+            var  someInput = document.getElementById('someInput').value;
+    if(someInput != ''){
+            var someArray = [];
+            var listArray = [];
+            var li = $('ul.myList li');
+            
+            li.each(function(){ 
+                listArray.push($(this).text())}); 
+                console.log('li-arr :'+listArray);
+            
+                var objfun= { match_found : function( array_key,arr_list){
+                    for(var i=0; i<=arr_list.length; i++){
+                      if(someInput == arr_list[i]){ return true; }
+                    }
+                    return false;}
+                }
+         
+            var result = objfun.match_found(someInput ,listArray);
+            if(!result){
+                someArray.push(someInput);
 
                           var mylist = $('ul.myList');      
                       $.each(someArray, function(i)
@@ -60,23 +63,20 @@
                           var li = $('<li/>')
                               .addClass('ui-li')
                               .attr('id', 'movieName')
-                              .text(someArray[i])
                               .appendTo(mylist);
-                       /*
                           var aaa = $('<a/>')
                               .addClass('ui-all')
-                              .text(someArray[i])
+                              .text(someInput)
                               .appendTo(li);
-                       */
                       });
-              }
-          
-        });
+            } else{
+                document.getElementById('message').innerHTML ='Searched Keyword already listed '+someInput ;
+                  setTimeout(function(){ document.getElementById('message').innerHTML ='';},3000)}
+         
+    }else{ message = '<p>input is missing </p>';
+         document.getElementById('message').innerHTML=message;}
 
-      }else{ message = '<p>input is missing </p>';
-            document.getElementById('message').innerHTML=message;}
+ });  
 
-      });
-
-    });
 </script>
+
