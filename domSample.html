@@ -1,8 +1,14 @@
 
 <html>
-    <head><title>DOM Elements</title></titl></head>
-    <script
-  src="jquery-3.2.1.min.js"></script>
+    <head><title>Playing with DOM</title></titl></head>
+  
+ <style>
+     .btn-del
+  {
+      margin-left: 25px;
+      background-color:wheat;
+  }
+ </style>
     <body>
 
        <div class="someForm" style="margin-top: 25px; margin-left: 15px;" >
@@ -18,8 +24,11 @@
         <button class="btn btn-success" id="formBtn" name="formBtn">SomeAdd</button>
         </div>
 
-        <div id=ulliid>
-        <ul class='myList'>
+        <div id='bank'  style="width:300px;">
+          
+            <h6 style="margin-left: 30px;">----------Lists ----------- </h6>
+         
+            <ul class='myList'>
         
         </ul>
        
@@ -30,7 +39,7 @@
        
     </body>
 </html>
-
+    <script src="jquery-3.2.1.min.js"></script>
 <script>
           
  $('#formBtn').on('click',function (e) { 
@@ -57,17 +66,22 @@
             if(!result){
                 someArray.push(someInput);
 
-                          var mylist = $('ul.myList');      
-                      $.each(someArray, function(i)
+                          var mylist = $('ul.myList ');      
+                      $.each(someArray, function(i) 
                       {
                           var li = $('<li/>')
                               .addClass('ui-li')
                               .attr('id', 'movieName')
                               .appendTo(mylist);
+                             
                           var aaa = $('<a/>')
-                              .addClass('ui-all')
+                              .addClass('direct')
                               .text(someInput)
                               .appendTo(li);
+                   
+                                    
+                                 
+                    
                       });
             } else{
                 document.getElementById('message').innerHTML ='Searched Keyword already listed '+someInput ;
